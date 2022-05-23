@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PDFService {
   @PostMapping("/extract")
   public @ResponseBody DidExtract extract(@RequestBody ForExtract forExtract) throws IOException {
-    var document = PDDocument.load(new File(forExtract.path));
+    var document = PDDocument.load(new File(forExtract.pdfPath));
     var didExtract = new DidExtract();
     if (forExtract.textsOfPage != null) {
       didExtract.textsOfPage = PDFWorker.getTexts(document, forExtract.textsOfPage);
