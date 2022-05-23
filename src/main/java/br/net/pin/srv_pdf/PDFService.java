@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PDFService {
   @PostMapping("/extract")
-  public @ResponseBody HasExtract extract(@RequestBody ForExtract forExtract) throws IOException {
+  public @ResponseBody DidExtract extract(@RequestBody ForExtract forExtract) throws IOException {
     var document = PDDocument.load(new File(forExtract.path));
-    var hasExtract = new HasExtract();
+    var didExtract = new DidExtract();
     if (forExtract.textsOfPage != null) {
-      hasExtract.textsOfPage = PDFWorker.getTexts(document, forExtract.textsOfPage);
+      didExtract.textsOfPage = PDFWorker.getTexts(document, forExtract.textsOfPage);
     }
     if (forExtract.imageOfPage != null) {
-      hasExtract.imageOfPage = PDFWorker.getImage(document, forExtract.imageOfPage);
+      didExtract.imageOfPage = PDFWorker.getImage(document, forExtract.imageOfPage);
     }
     document.close();
-    return hasExtract;
+    return didExtract;
   }
 }
