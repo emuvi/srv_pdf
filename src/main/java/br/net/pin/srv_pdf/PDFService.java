@@ -14,14 +14,14 @@ public class PDFService {
   @PostMapping("/extract")
   public @ResponseBody DidExtract extract(@RequestBody ForExtract forExtract) throws IOException {
     var document = PDDocument.load(new File(forExtract.pdfPath));
-    var didExtract = new DidExtract();
+    var response = new DidExtract();
     if (forExtract.textsOfPage != null) {
-      didExtract.textsOfPage = PDFWorker.getTexts(document, forExtract.textsOfPage);
+      response.textsOfPage = PDFWorker.getTexts(document, forExtract.textsOfPage);
     }
     if (forExtract.imageOfPage != null) {
-      didExtract.imageOfPage = PDFWorker.getImage(document, forExtract.imageOfPage);
+      response.imageOfPage = PDFWorker.getImage(document, forExtract.imageOfPage);
     }
     document.close();
-    return didExtract;
+    return response;
   }
 }
